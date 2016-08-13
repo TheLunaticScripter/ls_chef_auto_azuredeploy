@@ -59,7 +59,7 @@ Write-Host 'Storage Account is' $AzureStorageAccount
 ### Get Virtual Network ###
 $AzureVirtualNetwork = ($AzureResourceGroup | Get-AzureRmVirtualNetwork).Name
 Write-Host 'Virtual Network is' $AzureVirtualNetwork
-<#
+
 $parameters = @{
     'StorageAccountName'="$AzureStorageAccount";
     'adminUsername'="$AdminUsername";
@@ -116,7 +116,7 @@ New-AzureRmResourceGroupDeployment `
     -TemplateFile azure_chefcmpl.json `
     -TemplateParameterObject $parameters `
     -Verbose
-#>
+
 # Deploy Chef Windows Management Server
 ### Define variables
 
