@@ -35,9 +35,6 @@
   },
   "variables": {
     "location": "East US",
-    "imagePublisher": "Canonical",
-    "imageOffer": "UbuntuServer",
-    "ubuntuOSVersion": "14.04.2-LTS",
     "OSDiskName": "chefbld1Disk",
     "nicName": "chefbld1Nic",
     "addressPrefix": "10.0.0.0/16",
@@ -47,7 +44,7 @@
     "publicIPAddressName": "chefbld1PublicIP",
     "publicIPAddressType": "Dynamic",
     "vmStorageAccountContainerName": "vhds",
-    "vmName": "chef-bld1",
+    "vmName": "CHEF-BLD1",
     "vmSize": "Standard_D1",
     "vnetID": "[resourceId('Microsoft.Network/virtualNetworks',parameters('virtualNetworkName'))]",
     "subnetRef": "[concat(variables('vnetID'),'/subnets/',variables('subnetName'))]"
@@ -140,12 +137,12 @@
           "adminPassword": "[parameters('adminPassword')]"
         },
         "storageProfile": {
-          "imageReference": {
-            "publisher": "[variables('imagePublisher')]",
-            "offer": "[variables('imageOffer')]",
-            "sku": "[variables('ubuntuOSVersion')]",
-            "version": "latest"
-          },
+          "imageReference":{
+          "publisher": "OpenLogic",
+          "offer": "CentOS",
+          "sku": "6.8",
+          "version": "latest"
+        } ,
           "osDisk": {
             "name": "osdisk",
             "vhd": {

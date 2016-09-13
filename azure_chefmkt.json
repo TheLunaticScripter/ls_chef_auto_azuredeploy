@@ -35,16 +35,16 @@
   },
   "variables": {
     "location": "East US",
-    "OSDiskName": "chefbld2Disk",
-    "nicName": "chefbld2Nic",
+    "OSDiskName": "chefmkt2Disk",
+    "nicName": "chefmkt2Nic",
     "addressPrefix": "10.0.0.0/16",
     "subnetName": "Subnet",
     "subnetPrefix": "10.0.0.0/24",
     "storageAccountType": "Standard_LRS",
-    "publicIPAddressName": "chefbld2PublicIP",
+    "publicIPAddressName": "chefmkt2PublicIP",
     "publicIPAddressType": "Dynamic",
     "vmStorageAccountContainerName": "vhds",
-    "vmName": "CHEF-BLD2",
+    "vmName": "CHEF-MKT",
     "vmSize": "Standard_D1",
     "vnetID": "[resourceId('Microsoft.Network/virtualNetworks',parameters('virtualNetworkName'))]",
     "subnetRef": "[concat(variables('vnetID'),'/subnets/',variables('subnetName'))]"
@@ -142,7 +142,7 @@
           "offer": "CentOS",
           "sku": "6.8",
           "version": "latest"
-          } ,
+        } ,
           "osDisk": {
             "name": "osdisk",
             "vhd": {
