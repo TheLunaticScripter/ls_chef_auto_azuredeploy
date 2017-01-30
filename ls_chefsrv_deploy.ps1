@@ -55,16 +55,18 @@ Write-Host 'Resource Group Name is'$AzureResourceGroup.ResourceGroupName
 
 ### Get Storage Account ###
 
-if(($AzureResourceGroup | Get-AzureRmStorageAccount).StorageAccountName -like "*chefstorage*"){
-    $AzureStorageAccount = ($AzureRessourceGroup | Get-AzureRmStorageAccount).StorageAccountName
+if((Get-AzureRmStorageAccount).StorageAccountName -like "*chefstorage*"){
+    Write-Host "Storage Account exsists"
+    $AzureStorageAccount = Get-AzureRmStorageAccount | where {$_.StorageAccountName -like "*chefstorage*"}
+    
 }
 else{
     $AzureStorageAccount = $StorageName + (New-RandomString)
 }
-Write-Host 'Storage Account is' $AzureStorageAccount
+Write-Host 'Storage Account is' $AzureStorageAccount.StorageAccountName
 
 $parameters = @{
-    'newStorageAccountName'="$AzureStorageAccount";
+    'newStorageAccountName'="$($AzureStorageAccount.StorageAccountName)";
     'adminUsername'="$AdminUsername";
     'dnsNameForPublicIP'="$PublicDNSName";
     }
@@ -89,7 +91,7 @@ $PublicDNSName = 'chef-lab-' + (New-RandomString)
 $AdminUsername = 'chef'
 
 $parameters = @{
-    'StorageAccountName'="$AzureStorageAccount";
+    'StorageAccountName'="$($AzureStorageAccount.StorageAccountName)";
     'adminUsername'="$AdminUsername";
     'dnsNameForPublicIP'="$PublicDNSName";
     'virtualNetworkName'="$AzureVirtualNetwork"
@@ -110,7 +112,7 @@ $PublicDNSName = 'chef-lab-' + (New-RandomString)
 $AdminUsername = 'chef'
 
 $parameters = @{
-    'StorageAccountName'="$AzureStorageAccount";
+    'StorageAccountName'="$($AzureStorageAccount.StorageAccountName)";
     'adminUsername'="$AdminUsername";
     'dnsNameForPublicIP'="$PublicDNSName";
     'virtualNetworkName'="$AzureVirtualNetwork"
@@ -126,12 +128,12 @@ New-AzureRmResourceGroupDeployment `
 # Deploy Chef Windows Management Server
 ### Define variables
 
-$DeploymentName = 'chef-auto-deployment'
+$DeploymentName = 'chef-win-deployment'
 $PublicDNSName = 'chef-lab-' + (New-RandomString)
 $AdminUsername = 'chef'
 
 $parameters = @{
-    'StorageAccountName'="$AzureStorageAccount";
+    'StorageAccountName'="$($AzureStorageAccount.StorageAccountName)";
     'adminUsername'="$AdminUsername";
     'dnsNameForPublicIP'="$PublicDNSName";
     'virtualNetworkName'="$AzureVirtualNetwork"
@@ -147,12 +149,12 @@ New-AzureRmResourceGroupDeployment `
 # Deploy Chef First Build Node
 ### Define variables
 
-$DeploymentName = 'chef-auto-deployment'
+$DeploymentName = 'chef-bld1-deployment'
 $PublicDNSName = 'chef-lab-' + (New-RandomString)
 $AdminUsername = 'chef'
 
 $parameters = @{
-    'StorageAccountName'="$AzureStorageAccount";
+    'StorageAccountName'="$($AzureStorageAccount.StorageAccountName)";
     'adminUsername'="$AdminUsername";
     'dnsNameForPublicIP'="$PublicDNSName";
     'virtualNetworkName'="$AzureVirtualNetwork"
@@ -168,12 +170,12 @@ New-AzureRmResourceGroupDeployment `
 # Deploy Chef Second Build Node
 ### Define variables
 
-$DeploymentName = 'chef-auto-deployment'
+$DeploymentName = 'chef-bld2-deployment'
 $PublicDNSName = 'chef-lab-' + (New-RandomString)
 $AdminUsername = 'chef'
 
 $parameters = @{
-    'StorageAccountName'="$AzureStorageAccount";
+    'StorageAccountName'="$($AzureStorageAccount.StorageAccountName)";
     'adminUsername'="$AdminUsername";
     'dnsNameForPublicIP'="$PublicDNSName";
     'virtualNetworkName'="$AzureVirtualNetwork"
@@ -188,12 +190,12 @@ New-AzureRmResourceGroupDeployment `
     
 # Deploy Chef Supermarket
 ### Define variables
-$DeploymentName = 'chef-auto-deployment'
+$DeploymentName = 'chef-sup-deployment'
 $PublicDNSName = 'chef-lab-' + (New-RandomString)
 $AdminUsername = 'chef'
 
 $parameters = @{
-    'StorageAccountName'="$AzureStorageAccount";
+    'StorageAccountName'="$($AzureStorageAccount.StorageAccountName)";
     'adminUsername'="$AdminUsername";
     'dnsNameForPublicIP'="$PublicDNSName";
     'virtualNetworkName'="$AzureVirtualNetwork"
